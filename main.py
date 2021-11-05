@@ -63,21 +63,23 @@ def lg(a, t):
 
 
 def xnrt(a, n, r, t): # faltan los CASES
-    qsn = q(n)[s(n)-1]
-    xnrt1 = sum(sum(binomial(r, i-t-1) * binomial(i, k) * bernoulli(i-k) / (i*(2**(i-1)-a))
-                   for i in range(k, r+t+1) if i != t + lg(a, t) + 1) * n**k for k in range(1, r+t+1))
-    xnrt2 = 1 / (a - 1) * delta(r > 0 and t == 0 and a != 1)
-    xnrt3 = (1 - sum(binomial(r, l) / (2**(t+l) - a) for l in range(r) if l != lg(a, t))) \
-           * (T(0, q(n)[s(n)-1], 2*a) + n*a**(q(n)[s(n)-1]) - (2*a)**(q(n)[s(n)-1]))
-    xnrt4 = sum(2**(-i) * binomial(r+t, i) - 2**(-i+1) * binomial(r, i-t)
-                 - sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l) - a) for l in range(i-t+1, r)) * alpha(n, 0, i, a)
-                 for i in range(r+t))
-    xnrt5 = delta(r > 0 and lg(a, t) in range(r)) / a * binomial(r, lg(a, t)) * (T(1,q(n)[s(n)-1], 2*a)
-                                                                                + (n*a**(q(n)[s(n)-1]))*q(n)[s(n)-1]
-                                                                                + sum(binomial(t+lg(a, t), i)
-                                                                                      * alpha(n, 1, i, a)
-                                                                                      for i in range(t+lg(a, t))))
-    return xnrt1 + xnrt2 + xnrt3 + xnrt4 + xnrt5
+    if r == 0:
+        return xn0t(a, n, t)
+    elif t == 0:
+        return xnr0(a, n, r)
+    else:
+        qsn = q(n)[s(n)-1]
+        if a == 1/2:
+            sum1 = 2 * sum(sum(binomial(r, j-t-1) * binomial(j, k) * bernoulli(j-k) / (j*(2**(j-1) - a))
+                               for j in range(k, r+t+1)) * n**k for k in range(1, r+t+1))
+            sum2 = (1 - sum(binomial(r, l) / (2**(t+l) - a) for l in range(r))) * (((2*a)**qsn - 1) / (2*a - 1)
+                                                                                   + n*a**qsn - (2*a)**qsn)
+            sum3 = sum((2**(-i) * binomial(r+t, i) - 2**(-i+1) * binomial(r, i-t) -
+                       sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l) - a) for l in range(i-t+1, r)))
+                       * alpha(n, 0, i, a) for i in range(r+t))
+            return sum1 + sum2 + sum3
+
+
 
 
 def xn0t(a, n, t):
