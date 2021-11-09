@@ -13,7 +13,7 @@ def bs(pol):     # de momento, asumo que la entrada *es* un polinomio de sympy
 
     bs = [[0 for _ in range(degy+1)] for _ in range(degx+1)]
     for r, t in rts:
-        bs[r-1][t-1] = pol.coeff_monomial(x**r * y**t)
+        bs[r][t] = pol.coeff_monomial(x**r * y**t)
     return bs
 
 
