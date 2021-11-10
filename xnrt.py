@@ -19,9 +19,9 @@ def alpha(n, d, m, a):  # q[i-1]
     qsn = q(n)[s(n)]
     if m == 0:
         sum1 = 1 / 2 * sum(M(n, i) * (T(d, q(n)[i], a) - T(d, q(n)[i-1], a)) for i in range(1, s(n) + 1))
-        print("sum1 " + str(sum1))
+        #print("sum1 " + str(sum1))
         sum2 = sum(q(n)[i]**d * a**q(n)[i] * (n - M(n, i)) for i in range(1, s(n))) - T(d, qsn, 2 * a)
-        print("sum2 " + str(sum2))
+        #print("sum2 " + str(sum2))
     else:
         sum1 = 1 / (2*(m+1)) * sum(sum(binomial(m+1, j) * bernoulli(j) * 2**j * M(n, i)**(m+1-j)
                                        * (T(d, q(n)[i], a*2**(j-m)) - T(d, q(n)[i-1], a*2**(j-m)))
@@ -49,6 +49,21 @@ def xnrt(n, r, t, a): # faltan los CASES
                        * alpha(n, 0, i, a) for i in range(r+t))
             return sum1 + sum2 + sum3
 
+        elif a == 1:
+            sum1 = sum(sum(binomial(r, j-t-1) * binomial(j, k) * bernoulli(j-k) / (j * (2**(j-1) - 1))
+                               for j in range(k, r+t+1)) * n**k for k in range(2, r+t+1))
+            sum2 = sum(binomial(r, j-t-1) * bernoulli(j-1) / (2**(j-1) - 1)
+                       for j in range(2, r+t+1)) * n
+            sum3 = (1 - sum(binomial(r, l) / (2**(t+l) - 1) for l in range(r))) * (n - 1)
+            sum4 = sum((2**(-i) * binomial(r+t, i) - 2**(-i+1) * binomial(r, i-t)
+                       - sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l) - 1) for l in range(i-t+1, r))) * alpha(n, 0, i, 1)
+                       for i in range(r+t))
+            print("sum1 " + str(sum1))
+            print("sum2 " + str(sum2))
+            print("sum3 " + str(sum3))
+            print("sum4 " + str(sum4))
+            return sum1 + sum2 + sum3 + sum4
+
         elif any(a == 2**(t+ell) for ell in range(r)):
             ell = log(a, 2)
             sum1 = sum((sum(binomial(r, j-t-1) * binomial(j, k) / (j * (2**(j-1) - a)) for j in range(k, r+t+1)
@@ -64,12 +79,12 @@ def xnrt(n, r, t, a): # faltan los CASES
             return sum1 + sum2 + sum3 + sum4 + sum5
 
         else:
-            sum1 = 2 * sum(sum(binomial(r, j-t-1) * binomial(j, k) * bernoulli(j-k) / (j * (2**j - 1))
+            sum1 = sum(sum(binomial(r, j-t-1) * binomial(j, k) * bernoulli(j-k) / (j * (2**(j-1) - a))
                                for j in range(k, r+t+1)) * n**k for k in range(1, r+t+1))
             sum2 = (1 - sum(binomial(r, l) / (2**(t+l) - a) for l in range(r))) * (((2*a)**qsn - 1) / (2*a - 1)
                                                                                    + n*a**qsn - (2*a)**qsn)
-            sum3 = sum(2**(-i) * binomial(r+t,i) - 2**(-i+1) * binomial(r, i-t)
-                       - sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l - a)) for l in range(i-t+1, r)) * alpha(n, 0, i, a)
+            sum3 = sum((2**(-i) * binomial(r+t, i) - 2**(-i+1) * binomial(r, i-t)
+                       - sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l) - a) for l in range(i-t+1, r))) * alpha(n, 0, i, a)
                        for i in range(r+t))
             return sum1 + sum2 + sum3
 
