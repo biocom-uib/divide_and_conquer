@@ -6,7 +6,7 @@ x, y = symbols('x, y')
 a, x1, n = symbols('a, x1, n')
 
 
-def bs(pol):     # de momento, asumo que la entrada *es* un polinomio de sympy
+def bs(pol):
     degx = pol.degree(x)
     degy = pol.degree(y)
     rts = pol.monoms()
@@ -17,7 +17,7 @@ def bs(pol):     # de momento, asumo que la entrada *es* un polinomio de sympy
     return bs
 
 
-def xnvar(avar, pol, x1var, nvar):   # q[i-1] // AQUÍ LA ENTRADA NO ES POL DE SYMPY
+def xn(avar, pol, x1var, nvar):
     p = poly(pol, x, y)
     b = bs(p)
     qsn = q(nvar)[s(nvar)]
@@ -29,5 +29,5 @@ def xnvar(avar, pol, x1var, nvar):   # q[i-1] // AQUÍ LA ENTRADA NO ES POL DE S
            + ((2 * avar) ** qsn + (2 * avar - 1) * (nvar * avar ** qsn - (2 * avar) ** qsn)) * x1var
 
 
-def xn(avar, pol, x1var):
-    return lambda nvar: xnvar(avar, pol, x1var, nvar)
+def xnvar(avar, pol, x1var):
+    return lambda nvar: xn(avar, pol, x1var, nvar)

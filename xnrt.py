@@ -2,7 +2,7 @@ from utils import *
 from sympy import binomial, bernoulli, poly
 
 
-def T(d, n, x): # I use the notations from the article // alerta la X
+def T(d, n, x):
     if d == 0 and x == 1:
         return n
     elif d == 0:
@@ -19,9 +19,8 @@ def alpha(n, d, m, a):  # q[i-1]
     qsn = q(n)[s(n)]
     if m == 0:
         sum1 = 1 / 2 * sum(M(n, i) * (T(d, q(n)[i], a) - T(d, q(n)[i-1], a)) for i in range(1, s(n) + 1))
-        #print("sum1 " + str(sum1))
         sum2 = sum(q(n)[i]**d * a**q(n)[i] * (n - M(n, i)) for i in range(1, s(n))) - T(d, qsn, 2 * a)
-        #print("sum2 " + str(sum2))
+
     else:
         sum1 = 1 / (2*(m+1)) * sum(sum(binomial(m+1, j) * bernoulli(j) * 2**j * M(n, i)**(m+1-j)
                                        * (T(d, q(n)[i], a*2**(j-m)) - T(d, q(n)[i-1], a*2**(j-m)))
@@ -31,7 +30,7 @@ def alpha(n, d, m, a):  # q[i-1]
     return sum1 + sum2
 
 
-def xnrt(n, r, t, a): # faltan los CASES
+def xnrt(n, r, t, a):
     if r == 0:
         return xn0t(n, t, a)
     elif t == 0:
@@ -58,10 +57,6 @@ def xnrt(n, r, t, a): # faltan los CASES
             sum4 = sum((2**(-i) * binomial(r+t, i) - 2**(-i+1) * binomial(r, i-t)
                        - sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l) - 1) for l in range(i-t+1, r))) * alpha(n, 0, i, 1)
                        for i in range(r+t))
-            print("sum1 " + str(sum1))
-            print("sum2 " + str(sum2))
-            print("sum3 " + str(sum3))
-            print("sum4 " + str(sum4))
             return sum1 + sum2 + sum3 + sum4
 
         elif any(a == 2**(t+ell) for ell in range(r)):
