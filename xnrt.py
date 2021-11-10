@@ -1,5 +1,5 @@
 from utils import *
-from sympy import binomial, bernoulli, poly
+from sympy import binomial, bernoulli
 
 
 def T(d, n, x):
@@ -39,12 +39,11 @@ def xnrt(n, r, t, a):
         qsn = q(n)[s(n)]
 
         if a == 1/2:
-            sum1 = 2 * sum(sum(binomial(r, j-t-1) * binomial(j, k) * bernoulli(j-k) / (j*(2**(j-1) - a))
+            sum1 = 2 * sum(sum(binomial(r, j-t-1) * binomial(j, k) * bernoulli(j-k) / (j*(2**j - 1))
                                for j in range(k, r+t+1)) * n**k for k in range(1, r+t+1))
-            sum2 = (1 - sum(binomial(r, l) / (2**(t+l) - a) for l in range(r))) * (((2*a)**qsn - 1) / (2*a - 1)
-                                                                                   + n*a**qsn - (2*a)**qsn)
+            sum2 = (1 - 2 * sum(binomial(r, l) / (2**(t+l+1) - 1) for l in range(r))) * (qsn + n*2**(-qsn) - 1)
             sum3 = sum((2**(-i) * binomial(r+t, i) - 2**(-i+1) * binomial(r, i-t) -
-                       sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l) - a) for l in range(i-t+1, r)))
+                       2 * sum(binomial(r, l) * binomial(t+l, i) / (2**(t+l+1) - 1) for l in range(i-t+1, r)))
                        * alpha(n, 0, i, a) for i in range(r+t))
             return sum1 + sum2 + sum3
 
@@ -102,10 +101,12 @@ def xnr0(n, r, a):
     if a == 1/2:
         sum1 = 2 * sum((sum(binomial(r, j-1) * binomial(j, k) * bernoulli(j-k) / (j * (2**j - 1))
                             for j in range(k, r+1))) * n**k for k in range(1, r+1))
-        sum2 = (1 - 2 * sum(binomial(r,l) / (2**(l+1) - 1) for l in range(r))) * (qsn + n * 2**(-qsn)
-                                                                                  - 1)
-        sum3 = sum(2**(-i) * binomial(r,i) + 2 * sum(binomial(r,l) * binomial(l,i) / (2**(l+1) - 1) for l in range(i+1,r))
+        sum2 = (1 - 2 * sum(binomial(r, l) / (2**(l+1) - 1) for l in range(r))) * (qsn + n * 2**(-qsn) - 1)
+        sum3 = sum((2**(-i) * binomial(r, i) + 2 * sum(binomial(r, l) * binomial(l, i) / (2**(l+1) - 1) for l in range(i+1, r)))
                    * alpha(n, 0, i, a) for i in range(r)) + 2
+        print("sum1 " + str(sum1))
+        print("sum2 " + str(sum2))
+        print("sum3 -" + str(sum3))
         return sum1 + sum2 - sum3
 
     elif a == 1:
