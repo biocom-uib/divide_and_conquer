@@ -42,4 +42,3 @@ def s(n):
 
 def lg(a, t):
     return int(log(a, 2)) - t
-

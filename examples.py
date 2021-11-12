@@ -1,6 +1,8 @@
 from sympy import symbols, binomial
 
-a, c = symbols("a, c")
+a, c, x1 = symbols("a, c, x1")
+
+# hablar del .subs
 
 
 def ex1(x1, n):

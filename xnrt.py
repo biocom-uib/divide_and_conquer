@@ -137,4 +137,3 @@ def xnr0(n, r, a):
                                                                                 for l in range(i+1, r))) * alpha(n, 0, i, a)
                    for i in range(r))
         return sum1 + sum2 + sum3
-
