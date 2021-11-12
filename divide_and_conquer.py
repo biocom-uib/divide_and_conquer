@@ -1,20 +1,9 @@
 from sympy import symbols, poly
 from xnrt import xnrt
-from utils import s, q
+from utils import s, q, bs
 
 x, y = symbols('x, y')
 a, x1, n = symbols('a, x1, n')
-
-
-def bs(pol):
-    degx = pol.degree(x)
-    degy = pol.degree(y)
-    rts = pol.monoms()
-
-    bs = [[0 for _ in range(degy+1)] for _ in range(degx+1)]
-    for r, t in rts:
-        bs[r][t] = pol.coeff_monomial(x**r * y**t)
-    return bs
 
 
 def xn(avar, pol, x1var, nvar):
