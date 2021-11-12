@@ -96,7 +96,6 @@ def xn0t(n, t, a):
 
 
 def xnr0(n, r, a):
-    print("ahoy")
     qsn = q(n)[s(n)]
 
     if a == 1/2:
@@ -117,8 +116,6 @@ def xnr0(n, r, a):
         return sum1 + sum2 + sum3 - sum4
 
     elif any(a == 2**ell for ell in range(1, r)):
-
-        print("ahoy")
         ell = int(log(a, 2))
         sum1 = (1 - sum(binomial(r, l) / (2**l - a) for l in range(r) if l != ell)) * (((2*a)**qsn - 1) / (2*a - 1)
                                                                                        + n * a**qsn - (2*a)**qsn)
@@ -129,12 +126,6 @@ def xnr0(n, r, a):
         sum4 = binomial(r, ell) / a * ((qsn * (2*a)**(qsn+1) - qsn*(2*a) - (2*a)**(qsn+1) + 2*a) / (2*a - 1)**2
                                        + qsn * a**qsn * (n - 2**qsn))
         sum5 = binomial(r, ell) / a * sum(binomial(ell, i) * alpha(n, 1, i, a) for i in range(ell))
-
-        print("sum1 " + str(sum1))
-        print("sum2 " + str(sum2))
-        print("sum3 " + str(sum3))
-        print("sum4 " + str(sum4))
-        print("sum5 " + str(sum5))
         return sum1 + sum2 - sum3 + sum4 + sum5
 
     else:
@@ -145,10 +136,5 @@ def xnr0(n, r, a):
         sum3 = sum((2**(-i) * binomial(r, i) - 2**(-i+1) * binomial(r, i) - sum(binomial(r, l) * binomial(l, i) / (2**l - a)
                                                                                 for l in range(i+1, r))) * alpha(n, 0, i, a)
                    for i in range(r))
-
-
-        print("sum1 " + str(sum1))
-        print("sum2 " + str(sum2))
-        print("sum3 " + str(sum3))
         return sum1 + sum2 + sum3
 
