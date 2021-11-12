@@ -1,8 +1,19 @@
+"""
+All the examples presented here are those of the article, but they
+are not computed in the most efficient way possible -- indeed, this
+appendix is only meant to test the validity of the algorithms.
+In some cases problems arise due to polynomial simplifications and
+errors in the evaluation of the equality between `int` and `float`
+instances.
+
+For some methods, better algorithms already exist in the Python
+repository https://github.com/biocom-uib/biotrees
+"""
+
+
 from sympy import symbols, binomial
 
 a, c, x1 = symbols("a, c, x1")
-
-# hablar del .subs
 
 
 def ex1(x1, n):
