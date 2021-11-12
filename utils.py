@@ -30,7 +30,7 @@ def delta(p):
         return 0
 
 
-def q(n):       # siguiendo la idea de Cesc de que q0 = 0
+def q(n):
     bn = format(n, 'b')[::-1]
     lg = len(bn)
     return [0] + [i for i in range(lg) if bn[i] == '1']

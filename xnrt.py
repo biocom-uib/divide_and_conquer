@@ -15,7 +15,7 @@ def T(d, n, x):
         return sum(k**d * x**k for k in range(n))
 
 
-def alpha(n, d, m, a):  # q[i-1]
+def alpha(n, d, m, a):
     qsn = q(n)[s(n)]
     if m == 0:
         sum1 = 1 / 2 * sum(M(n, i) * (T(d, q(n)[i], a) - T(d, q(n)[i-1], a)) for i in range(1, s(n) + 1))
