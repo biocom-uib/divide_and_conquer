@@ -16,90 +16,90 @@ from sympy import symbols, binomial
 a, c, x1 = symbols("a, c, x1")
 
 
-def ex1(x1, n):
+def ex1(n, x1var=x1):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return a*ex1(x1, (n+res)//2) + a*ex1(x1, (n-res)//2) + c
+        return a * ex1((n + res) // 2, x1var) + a * ex1((n - res) // 2, x1var) + c
 
 
-def ex2(x1, n):
+def ex2(n, x1var=0):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return ex2(x1, (n + res) // 2) + ex2(x1, (n - res) // 2) + n
+        return ex2((n + res) // 2, x1var) + ex2((n - res) // 2, x1var) + n
 
 
-def ex3(x1, n):
+def ex3(n, x1var=0):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return ex3(x1, (n + res) // 2) + ex3(x1, (n - res) // 2) + (n-res) // 2
+        return ex3((n + res) // 2, x1var) + ex3((n - res) // 2, x1var) + (n-res) // 2
 
 
-def ex4(x1, n):
+def ex4(n, x1var=1):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return ex4(x1, (n + res) // 2) + ex4(x1, (n - res) // 2) + res
+        return ex4((n + res) // 2, x1var) + ex4((n - res) // 2, x1var) + res
 
 
-def ex5(x1, n):
+def ex5(n, x1var=1):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return ex5(x1, (n + res) // 2) + ex5(x1, (n - res) // 2) + n**2 - res
+        return ex5((n + res) // 2, x1var) + ex5((n - res) // 2, x1var) + n ** 2 - res
 
 
-def ex6(x1, n):
+def ex6(n, x1var=0):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return - ex6(x1, (n+res)//2) - ex6(x1, (n-res)//2) + (n - res) // 2
+        return - ex6((n + res) // 2, x1var) - ex6((n - res) // 2, x1var) + (n - res) // 2
 
 
-def ex7(x1, n):
+def ex7(n, x1var=0):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return ex7(x1, (n + res) // 2) + ex7(x1, (n - res) // 2) + binomial((n+res)//2, 2) + binomial((n-res)//2, 2)
+        return ex7((n + res) // 2, x1var) + ex7((n - res) // 2, x1var) + binomial((n + res) // 2, 2) + binomial((n - res) // 2, 2)
 
 
-def ex8(x1, n):
+def ex8(n, x1var=0):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return ex8(x1, (n + res) // 2) + ex8(x1, (n - res) // 2) + binomial((n+res)//2, 2)*binomial((n-res)//2, 2)
+        return ex8((n + res) // 2, x1var) + ex8((n - res) // 2, x1var) + binomial((n + res) // 2, 2) * binomial((n - res) // 2, 2)
 
 
-def ex9(x1, n):
+def ex9(n, x1var=0):
     res = n % 2
     if n == 1:
-        return x1
+        return x1var
     else:
-        return 1/2*(ex9(x1, (n + res) // 2) + ex9(x1, (n - res) // 2) + res)
+        return 1/2*(ex9((n + res) // 2, x1var) + ex9((n - res) // 2, x1var) + res)
 
 
-def ex10(i, x1, n):
+def ex10(i, n, x1var=0):
     res = n % 2
     if n == 0:
         return
     elif n == 1:
-        return x1
+        return x1var
     else:
         g1 = (n-res)//2 * res
         g3 = 4 * (n-res)//2 + 2 * (n+res)//2 - 6 - g1
         if i == 1:
-            return 2*ex10(1, x1, (n + res) // 2) + 2*ex10(1, x1, (n - res) // 2) + g1
+            return 2 * ex10(1, (n + res) // 2, x1var) + 2 * ex10(1, (n - res) // 2, x1var) + g1
         elif i == 3:
-            return 2*ex10(3, x1, (n + res) // 2) + 2*ex10(3, x1, (n - res) // 2) + g3
+            return 2 * ex10(3, (n + res) // 2, x1var) + 2 * ex10(3, (n - res) // 2, x1var) + g3
         else:
             return "i not in {1,3}"
