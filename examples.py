@@ -67,7 +67,7 @@ def ex3(n, x1var=0):
     if n == 1:
         return x1var
     else:
-        return ex3((n + res) // 2, x1var) + ex3((n - res) // 2, x1var) + (n-res) // 2
+        return ex3((n + res) // 2, x1var) + ex3((n - res) // 2, x1var) + res
 
 
 def ex4(n, x1var=1):
