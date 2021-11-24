@@ -23,7 +23,8 @@ def __main__():
                                         "dividing by a half recurrence with polynomial independent term*, by"
                                         "Tomás M. Coronado, Arnau Mir and Francesc Rosselló.")
     parser.add_argument('example', metavar='ex. number', type=int, help="the number of the example you want to run")
-    parser.add_argument('')
+    parser.add_argument('term', metavar='term', type=int, help="the n-th term of the sequence")
+    parser.add_argument('subexample', metavar='ex10 subexample', type=int, help="one of the two options of example 10")
 
 
 
