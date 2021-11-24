@@ -14,8 +14,22 @@ For some methods, better algorithms already exist in the Python
 repository https://github.com/biocom-uib/biotrees
 """
 
-
+from argparse import ArgumentParser
 from sympy import symbols, binomial
+
+
+def __main__():
+    parser = ArgumentParser(description="Examples from the article *Explicit solution of a divide-and-conquer "
+                                        "dividing by a half recurrence with polynomial independent term*, by"
+                                        "Tomás M. Coronado, Arnau Mir and Francesc Rosselló.")
+    parser.add_argument('example', metavar='ex. number', type=int, help="the number of the example you want to run")
+    parser.add_argument('')
+
+
+
+
+
+
 
 a, c, x1 = symbols("a, c, x1")
 
