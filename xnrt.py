@@ -133,7 +133,7 @@ def xnr0(n, r, a):
                    * n**k for k in range(1, r+1))
         sum2 = (1 - sum(binomial(r, l) / (2**l - a) for l in range(r))) * (((2*a)**qsn - 1) / (2*a - 1) + n*a**qsn
                                                                            - (2*a)**qsn) + 1 / (a - 1)
-        sum3 = sum((2**(-i) * binomial(r, i) - 2**(-i+1) * binomial(r, i) - sum(binomial(r, l) * binomial(l, i) / (2**l - a)
-                                                                                for l in range(i+1, r))) * alpha(n, 0, i, a)
-                   for i in range(r))
-        return sum1 + sum2 + sum3
+        sum3 = sum((2**(-i) * binomial(r, i) + sum(binomial(r, l) * binomial(l, i) / (2**l - a) for l in range(i+1, r)))
+                                                                                 * alpha(n, 0, i, a) for i in range(r))
+                   
+        return sum1 + sum2 - sum3
