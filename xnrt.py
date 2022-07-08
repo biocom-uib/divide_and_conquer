@@ -123,7 +123,7 @@ def xnr0(n, r, a):
                        for i in range(k, r+1) if i != ell+1) * n**k for k in range(1, r+1)) + 1 / (a-1)
         sum3 = sum((2**(-i) * binomial(r, i) + sum(binomial(r, l) * binomial(l, i) / (2**l - a)
                                                    for l in range(i+1, r) if l != ell)) * alpha(n, 0, i, a) for i in range(r))
-        sum4 = binomial(r, ell) / a * ((qsn * (2*a)**(qsn+1) - qsn*(2*a) - (2*a)**(qsn+1) + 2*a) / (2*a - 1)**2
+        sum4 = binomial(r, ell) / a * ((qsn * (2*a)**(qsn+1) - qsn*(2*a)**qsn - (2*a)**(qsn+1) + 2*a) / (2*a - 1)**2
                                        + qsn * a**qsn * (n - 2**qsn))
         sum5 = binomial(r, ell) / a * sum(binomial(ell, i) * alpha(n, 1, i, a) for i in range(ell))
         return sum1 + sum2 - sum3 + sum4 + sum5
