@@ -68,7 +68,7 @@ def xnrt(n, r, t, a):
                    * (((2*a)**qsn - 1) / (2*a - 1) + n*a**qsn - (2*a)**qsn)
             sum4 = sum((2**(-i) * binomial(r+t, i) - 2**(-i+1) * binomial(r, i-t) - sum(binomial(r, l)
                                                                                         * binomial(t+l, i) / (2**(t+l) - a)
-                        for l in range(i-t+1, r) if l != ell)) * alpha(n, 0, i, a) for i in range(r+t-1))
+                        for l in range(i-t+1, r) if l != ell)) * alpha(n, 0, i, a) for i in range(r+t))
             sum5 = binomial(r, ell) / a * sum(binomial(t + ell, i) * alpha(n, 1, i, a) for i in range(t + ell))
             return sum1 + sum2 + sum3 + sum4 + sum5
 
